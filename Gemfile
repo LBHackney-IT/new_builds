@@ -31,6 +31,7 @@ gem 'devise'
 gem 'devise-foundation-views'
 gem 'foundation-rails'
 gem 'autoprefixer-rails'
+gem 'closure_tree'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
