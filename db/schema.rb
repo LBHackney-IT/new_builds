@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_31_110916) do
+ActiveRecord::Schema.define(version: 2018_07_31_112219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 2018_07_31_110916) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["scheme_id"], name: "index_locations_on_scheme_id"
+  end
+
+  create_table "scheme_priorities", force: :cascade do |t|
+    t.string "name"
+    t.integer "duration_in_hours"
+    t.bigint "scheme_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["scheme_id"], name: "index_scheme_priorities_on_scheme_id"
   end
 
   create_table "schemes", force: :cascade do |t|
@@ -54,4 +63,5 @@ ActiveRecord::Schema.define(version: 2018_07_31_110916) do
   end
 
   add_foreign_key "locations", "schemes"
+  add_foreign_key "scheme_priorities", "schemes"
 end
