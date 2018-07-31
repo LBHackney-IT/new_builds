@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :issues
-  root to: 'issues#index'
+  resources :schemes, only: [:index] do
+    resources :issues
+  end
+  root to: 'schemes#index'
 end

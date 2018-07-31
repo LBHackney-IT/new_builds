@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <tr>
+      <th>Scheme name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @schemes.each do |scheme| %>
+      <tr>
+        <td><%= link_to scheme.name, scheme_issues_path(scheme) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

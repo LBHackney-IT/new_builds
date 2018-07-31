@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_31_120902) do
+ActiveRecord::Schema.define(version: 2018_07_31_132055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "issues", force: :cascade do |t|
+    t.string "urn"
+    t.bigint "user_id"
+    t.bigint "scheme_id"
+    t.bigint "scheme_priority_id"
+    t.bigint "resident_id"
+    t.bigint "location_id"
+    t.text "description"
+    t.string "trade"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_issues_on_location_id"
+    t.index ["resident_id"], name: "index_issues_on_resident_id"
+    t.index ["scheme_id"], name: "index_issues_on_scheme_id"
+    t.index ["scheme_priority_id"], name: "index_issues_on_scheme_priority_id"
+    t.index ["user_id"], name: "index_issues_on_user_id"
+  end
 
   create_table "location_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id", null: false
@@ -71,6 +90,11 @@ ActiveRecord::Schema.define(version: 2018_07_31_120902) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "issues", "locations"
+  add_foreign_key "issues", "residents"
+  add_foreign_key "issues", "scheme_priorities"
+  add_foreign_key "issues", "schemes"
+  add_foreign_key "issues", "users"
   add_foreign_key "locations", "schemes"
   add_foreign_key "scheme_priorities", "schemes"
 end

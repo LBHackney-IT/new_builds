@@ -1,0 +1,35 @@
+<%= link_to '< Back', scheme_issues_path(@scheme) %>
+<div class="grid-x">
+  <div class="cell small-6">
+    <h2>Issue</h2>
+    <dl>
+      <dt>URN</dt>
+      <dd><%= @issue.urn %></dd>
+      <dt>Reported by</dt>
+      <dd><%= @issue.user.email %></dd>
+      <dt>Scheme</dt>
+      <dd><%= @issue.scheme.name %></dd>
+      <dt>Date reported</dt>
+      <dd><%= @issue.created_at.to_s(:short) %></dd>
+      <dt>Priority</dt>
+      <dd><%= @issue.scheme_priority.name %></dd>
+      <dt>Resident</dt>
+      <dd>
+        <%= @issue.resident.name %><br>
+        <%= @issue.resident.phone %><br>
+        <%= @issue.resident.email %>
+      </dd>
+      <dt>Description</dt>
+      <dd><%= @issue.description %></dd>
+      <dt>Trade</dt>
+      <dd><%= @issue.trade %></dd>
+      <dt>Status</dt>
+      <dd><%= @issue.status %></dd>
+      <dt>Location</dt>
+      <dd><%= @issue.location.name %></dd>
+    </dl>
+  </div>
+  <div class="cell small-6">
+    <h2>Comments</h2>
+  </div>
+</div>

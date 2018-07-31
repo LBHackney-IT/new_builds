@@ -28,8 +28,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
-gem 'devise-foundation-views'
 gem 'foundation-rails'
+gem 'devise-foundation-views'
+gem 'foundation_rails_helper'
 gem 'autoprefixer-rails'
 gem 'closure_tree'
 

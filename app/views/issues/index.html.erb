@@ -1,0 +1,34 @@
+<h1>Issues in <%= @scheme.name %></h1>
+
+<%= link_to "New issue", new_scheme_issue_path(@scheme), class: 'button float-right' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>URN</th>
+      <th>Reported by</th>
+      <th>Date reported</th>
+      <th>Resident</th>
+      <th>Description</th>
+      <th>Trade</th>
+      <th>Priority</th>
+      <th>Status</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @issues.each do |issue| %>
+      <tr>
+        <td><%= link_to issue.urn, scheme_issue_path(@scheme, issue) %></td>
+        <td><%= issue.user.email %></td>
+        <td><%= issue.created_at.to_s(:short) %></td>
+        <td><%= issue.resident.name %></td>
+        <td><%= issue.description %></td>
+        <td><%= issue.trade %></td>
+        <td><%= issue.scheme_priority.name %></td>
+        <td><%= issue.status %></td>
+        <td><%= issue.location.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
