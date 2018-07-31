@@ -98,6 +98,8 @@ GEM
     factory_bot_rails (4.10.0)
       factory_bot (~> 4.10.0)
       railties (>= 3.0.0)
+    faker (1.9.1)
+      i18n (>= 0.7)
     ffi (1.9.25)
     foundation-rails (6.4.3.0)
       railties (>= 3.1.0)
@@ -254,6 +256,7 @@ DEPENDENCIES
   devise
   devise-foundation-views
   factory_bot_rails
+  faker
   foundation-rails
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
