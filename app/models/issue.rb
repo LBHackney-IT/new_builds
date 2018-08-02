@@ -4,5 +4,6 @@ class Issue < ApplicationRecord
   belongs_to :scheme_priority
   belongs_to :resident
   belongs_to :location
+  has_many :comments
   Statuses = ["Outstanding", "Completed", "EOYD", "Dispute", "Referral", "Rejected"]
 end

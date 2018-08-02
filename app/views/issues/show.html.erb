@@ -31,5 +31,14 @@
   </div>
   <div class="cell small-6">
     <h2>Comments</h2>
+    <% @issue.comments.each do |comment| %>
+      <dt><%= comment.user.email %>: <%= comment.created_at.to_s(:short) %></dt>
+      <dd><%= simple_format comment.text %></dd>
+    <% end %>
+
+    <%= form_for [@scheme, @issue, Comment.new] do |form| %>
+      <%= form.text_area :text %>
+      <%= form.submit %>
+    <% end %>
   </div>
 </div>
