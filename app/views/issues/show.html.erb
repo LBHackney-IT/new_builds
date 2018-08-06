@@ -30,6 +30,7 @@
       <dt>Location</dt>
       <dd><%= @issue.location.name %></dd>
     </dl>
+    <p><%= link_to "Edit", edit_scheme_issue_path(@scheme, @issue) %></p>
   </div>
   <div class="cell small-6">
     <h2>Comments</h2>

@@ -22,6 +22,19 @@ class IssuesController < ApplicationController
     end
   end
 
+  def edit
+    @issue = @scheme.issues.find(params[:id])
+  end
+
+  def update
+    @issue = @scheme.issues.find(params[:id])
+    if @issue.update_attributes(issue_params)
+      redirect_to scheme_issues_path(@scheme)
+    else
+      render action: :new
+    end
+  end
+
   private
 
   def get_scheme
