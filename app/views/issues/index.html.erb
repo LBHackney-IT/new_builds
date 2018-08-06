@@ -12,6 +12,7 @@
       <th>Description</th>
       <th>Trade</th>
       <th>Priority</th>
+      <th>Due at</th>
       <th>Status</th>
       <th>Location</th>
     </tr>
@@ -26,6 +27,7 @@
         <td><%= issue.description %></td>
         <td><%= issue.trade %></td>
         <td><%= issue.scheme_priority.name %></td>
+        <td><%= issue.due_at.to_s(:short) %></td>
         <td><%= issue.status %></td>
         <td><%= issue.location.name %></td>
       </tr>

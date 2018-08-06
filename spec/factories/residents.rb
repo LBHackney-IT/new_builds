@@ -3,6 +3,6 @@ FactoryBot.define do
     name "MyString"
     phone "MyString"
     email "MyString"
-    dwelling_id 1
+    association :dwelling , factory: :location_dwelling
   end
 end
