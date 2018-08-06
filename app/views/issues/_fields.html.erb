@@ -1,0 +1,7 @@
+<%= form.text_field :urn %>
+<%= form.select :location_id, @scheme.locations.collect {|x| [x.name, x.id]} %>
+<%= form.select :scheme_priority_id, @scheme.scheme_priorities.collect {|x| [x.name, x.id]} %>
+<%= form.select :resident_id, @scheme.residents.collect {|x| [x.name, x.id]} %>
+<%= form.text_area :description %>
+<%= form.text_field :trade %>
+<%= form.select :status, Issue::Statuses %>
