@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :scheme do
-    name "MyString"
+    name "SchemeName"
   end
 end
