@@ -13,6 +13,8 @@
       <dd><%= @issue.created_at.to_s(:short) %></dd>
       <dt>Priority</dt>
       <dd><%= @issue.scheme_priority.name %></dd>
+      <dt>Due at</dt>
+      <dd><%= @issue.due_at.to_s(:short) %></dd>
       <dt>Resident</dt>
       <dd>
         <%= @issue.resident.name %><br>

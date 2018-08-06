@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Issue, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "calculates the due date from the scheme priority" do
+    scheme = create(:scheme)
+    scheme_priority = create(:scheme_priority, scheme: scheme, duration_in_hours: 36)
+    issue = create(:issue, scheme: scheme, scheme_priority: scheme_priority, created_at: "01/01/2018 12:00".to_time)
+    expect(issue.due_date).to eq("03/01/2018 00:00")
+  end
 end
