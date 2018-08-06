@@ -5,6 +5,6 @@ RSpec.describe Issue, type: :model do
     scheme = create(:scheme)
     scheme_priority = create(:scheme_priority, scheme: scheme, duration_in_hours: 36)
     issue = create(:issue, scheme: scheme, scheme_priority: scheme_priority, created_at: "01/01/2018 12:00".to_time)
-    expect(issue.due_date).to eq("03/01/2018 00:00")
+    expect(issue.due_at).to eq("03/01/2018 00:00")
   end
 end
