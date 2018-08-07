@@ -1,7 +1,11 @@
 class IssuesController < ApplicationController
   before_action :get_scheme
   def index
-    @issues = @scheme.issues.all
+    if params[:overdue]
+      @issues = @scheme.issues.open.overdue.order('due_at ASC').paginate(:page => params[:page])
+    else
+      @issues = @scheme.issues.paginate(:page => params[:page])
+    end
   end
 
   def show

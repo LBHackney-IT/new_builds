@@ -8,6 +8,9 @@ class Issue < ApplicationRecord
   Statuses = ["Outstanding", "Completed", "EOYD", "Dispute", "Referral", "Rejected"]
   before_save :set_due_at
 
+  scope :overdue, -> { where("due_at < ?", Time.now) }
+  scope :open, -> { where("status = 'Outstanding'") }
+
   def set_due_at
     created_at = self.created_at || Time.now
     self.due_at = created_at + self.scheme_priority.duration_in_hours.hours
