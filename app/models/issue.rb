@@ -10,4 +10,8 @@ class Issue < ApplicationRecord
   def due_at
     created_at + scheme_priority.duration_in_hours.hours
   end
+
+  def overdue?
+    self.due_at < Time.now && status == 'Outstanding'
+  end
 end
