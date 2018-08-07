@@ -19,4 +19,8 @@ class Issue < ApplicationRecord
   def overdue?
     self.due_at < Time.now && status == 'Outstanding'
   end
+
+  def overdue_or_status
+    overdue? ? 'overdue' : status.downcase
+  end
 end

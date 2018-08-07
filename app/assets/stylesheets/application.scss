@@ -35,3 +35,11 @@
 .description {
   background-color: #fff;
 }
+
+.overdue {
+  background-color: rgba(255, 0, 0, 0.5) !important
+}
+
+.completed {
+  background-color: rgba(0, 255, 0, 0.5) !important
+}

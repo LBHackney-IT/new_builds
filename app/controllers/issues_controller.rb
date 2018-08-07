@@ -4,7 +4,7 @@ class IssuesController < ApplicationController
     if params[:overdue]
       @issues = @scheme.issues.open.overdue.order('due_at ASC').paginate(:page => params[:page])
     else
-      @issues = @scheme.issues.paginate(:page => params[:page])
+      @issues = @scheme.issues.order('due_at DESC').paginate(:page => params[:page])
     end
   end
 

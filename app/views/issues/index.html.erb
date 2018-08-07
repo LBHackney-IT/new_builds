@@ -23,28 +23,32 @@
       <th>Due at</th>
       <th>Status</th>
       <th>Location</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @issues.each do |issue| %>
-      <tr>
-        <td><%= link_to (issue.urn || "N/A"), scheme_issue_path(@scheme, issue) %></td>
+      <tr class="<%= issue.overdue_or_status %>">
+        <td><%= issue.urn %></td>
         <td><%= issue.user.email %></td>
         <td><%= issue.created_at.to_s(:short) %></td>
         <td><%= issue.resident.name %></td>
-        <td><%= issue.description %></td>
+        <td><%= truncate issue.description %></td>
         <td><%= issue.trade %></td>
         <td><%= issue.scheme_priority.name %></td>
         <td>
           <%= issue.due_at.to_s(:short) %>
+        </td>
+        <td>
           <% if issue.overdue? %>
-            <div class="callout alert">
-              Overdue
-            </div>
+            <%= time_ago_in_words(issue.due_at) %>
+            overdue
+          <% else %>
+            <%= issue.status %>
           <% end %>
         </td>
-        <td><%= issue.status %></td>
         <td><%= issue.location.name %></td>
+        <td><%= link_to "View", scheme_issue_path(@scheme, issue) %></td>
       </tr>
     <% end %>
   </tbody>
