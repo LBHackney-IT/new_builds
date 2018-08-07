@@ -34,6 +34,7 @@ gem 'foundation_rails_helper'
 gem 'autoprefixer-rails'
 gem 'closure_tree'
 gem 'will_paginate-foundation'
+gem 'chartkick'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

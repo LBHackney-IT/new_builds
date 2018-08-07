@@ -3,12 +3,14 @@
 <%= link_to "New issue", new_scheme_issue_path(@scheme), class: 'button float-right' %>
 
 <% if params[:overdue] %>
-  <%= link_to "View all", scheme_issues_path(@scheme) %>
+  <p><%= link_to "View all", scheme_issues_path(@scheme) %></p>
 <% else %>
-  <%= link_to "Filter by overdue", scheme_issues_path(@scheme, overdue: 1) %>
+  <p><%= link_to "Filter by overdue", scheme_issues_path(@scheme, overdue: 1) %></p>
 <% end %>
 
-<%= @issues.count %> Issues.
+<p><%= link_to "Trades chart", type_chart_scheme_issues_path(@scheme) %></p>
+
+<p><%= @issues.count %> Issues.</p>
 
 <table class="shadow">
   <thead>

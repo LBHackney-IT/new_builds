@@ -8,6 +8,11 @@ class IssuesController < ApplicationController
     end
   end
 
+  def type_chart
+    @trades = @scheme.issues.group(:trade).count
+    @trades["None"] = @trades.delete(nil)
+  end
+
   def show
     @issue = @scheme.issues.find(params[:id])
   end
