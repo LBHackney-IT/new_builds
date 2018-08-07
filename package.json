@@ -1,5 +1,7 @@
 {
   "name": "new_builds",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "highcharts": "^6.1.1"
+  }
 }

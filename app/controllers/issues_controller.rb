@@ -1,7 +1,16 @@
 class IssuesController < ApplicationController
   before_action :get_scheme
   def index
-    @issues = @scheme.issues.all
+    if params[:overdue]
+      @issues = @scheme.issues.open.overdue.order('due_at ASC').paginate(:page => params[:page])
+    else
+      @issues = @scheme.issues.order('due_at DESC').paginate(:page => params[:page])
+    end
+  end
+
+  def type_chart
+    @trades = @scheme.issues.group(:trade).count
+    @trades["None"] = @trades.delete(nil)
   end
 
   def show

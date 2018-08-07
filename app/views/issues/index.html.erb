@@ -2,6 +2,16 @@
 
 <%= link_to "New issue", new_scheme_issue_path(@scheme), class: 'button float-right' %>
 
+<% if params[:overdue] %>
+  <p><%= link_to "View all", scheme_issues_path(@scheme) %></p>
+<% else %>
+  <p><%= link_to "Filter by overdue", scheme_issues_path(@scheme, overdue: 1) %></p>
+<% end %>
+
+<p><%= link_to "Trades chart", type_chart_scheme_issues_path(@scheme) %></p>
+
+<p><%= @issues.count %> Issues.</p>
+
 <table class="shadow">
   <thead>
     <tr>
@@ -15,22 +25,35 @@
       <th>Due at</th>
       <th>Status</th>
       <th>Location</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @issues.each do |issue| %>
-      <tr>
-        <td><%= link_to issue.urn, scheme_issue_path(@scheme, issue) %></td>
+      <tr class="<%= issue.overdue_or_status %>">
+        <td><%= issue.urn %></td>
         <td><%= issue.user.email %></td>
         <td><%= issue.created_at.to_s(:short) %></td>
         <td><%= issue.resident.name %></td>
-        <td><%= issue.description %></td>
+        <td><%= truncate issue.description %></td>
         <td><%= issue.trade %></td>
         <td><%= issue.scheme_priority.name %></td>
-        <td><%= issue.due_at.to_s(:short) %></td>
-        <td><%= issue.status %></td>
+        <td>
+          <%= issue.due_at.to_s(:short) %>
+        </td>
+        <td>
+          <% if issue.overdue? %>
+            <%= time_ago_in_words(issue.due_at) %>
+            overdue
+          <% else %>
+            <%= issue.status %>
+          <% end %>
+        </td>
         <td><%= issue.location.name %></td>
+        <td><%= link_to "View", scheme_issue_path(@scheme, issue) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @issues, renderer: FoundationPagination::Rails %>
