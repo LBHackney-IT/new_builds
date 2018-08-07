@@ -1,38 +1,53 @@
 <%= link_to '< Back', scheme_issues_path(@scheme) %>
-<div class="grid-x">
-  <div class="cell small-6">
-    <h2>Issue</h2>
-    <dl>
-      <dt>URN</dt>
-      <dd><%= @issue.urn %></dd>
-      <dt>Reported by</dt>
-      <dd><%= @issue.user.email %></dd>
-      <dt>Scheme</dt>
-      <dd><%= @issue.scheme.name %></dd>
-      <dt>Date reported</dt>
-      <dd><%= @issue.created_at.to_s(:short) %></dd>
-      <dt>Priority</dt>
-      <dd><%= @issue.scheme_priority.name %></dd>
-      <dt>Due at</dt>
-      <dd><%= @issue.due_at.to_s(:short) %></dd>
-      <dt>Resident</dt>
-      <dd>
+<div class="grid-x grid-margin-x">
+
+  <div class="cell medium-8">
+    <h2 class="display-inline">Issue details</h2> <span class="text-underline h5 margin-left-3"><%= link_to "Edit this issue", edit_scheme_issue_path(@scheme, @issue) %></span>
+    <div class="grid-x">
+      <!-- URN -->
+      <div class="cell">
+        <h3>URN <%= @issue.urn %></h3>
+      </div>
+      <!-- Priority, status, due date -->
+      <div class="cell">
+        <span class="badge secondary"><%= @issue.scheme_priority.name %></span>
+
+        <!-- success, at completion date -->
+        <span class="label <%= @issue.status%>"><%= @issue.status  %></span>
+        <span>due <%= @issue.due_at.to_s(:short) %></span>
+        <!-- TODO show overdue days -->
+      </div>
+      <hr>
+      <!-- Trade, description -->
+      <div class="cell description padding-left-1 padding-top-1">
+        <%= @issue.trade %>
+        <p>
+          <%= @issue.description %>
+        </p>
+      </div>
+      <hr>
+      <!-- Location, resident -->
+      <div class="width-50">
+        <p class="font-bold">Location</p>
+        <p>Great Eastern</p>
+        <p><%= @issue.location.name %></p>
+      </div>
+      <div class="width-50">
+        <p class="font-bold">Resident</p>
         <%= @issue.resident.name %><br>
         <%= @issue.resident.phone %><br>
         <%= @issue.resident.email %>
-      </dd>
-      <dt>Description</dt>
-      <dd><%= @issue.description %></dd>
-      <dt>Trade</dt>
-      <dd><%= @issue.trade %></dd>
-      <dt>Status</dt>
-      <dd><%= @issue.status %></dd>
-      <dt>Location</dt>
-      <dd><%= @issue.location.name %></dd>
-    </dl>
-    <p><%= link_to "Edit", edit_scheme_issue_path(@scheme, @issue) %></p>
+      </div>
+      <!-- Reported by and when -->
+      <div class="cell">
+        <p>
+          Reported by <span class="font-bold"><%= @issue.user.email %></span> on <span class="font-bold"><%= @issue.created_at.to_s(:short) %></span>
+        </p>
+      </div>
+    </div>
+
   </div>
-  <div class="cell small-6">
+  <div class="cell medium-4">
     <h2>Comments</h2>
     <% @issue.comments.each do |comment| %>
       <dt><%= comment.user.email %>: <%= comment.created_at.to_s(:short) %></dt>
