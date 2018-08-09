@@ -2,13 +2,22 @@
 
 <%= link_to "New issue", new_scheme_issue_path(@scheme), class: 'button float-right' %>
 
-<% if params[:overdue] %>
-  <p><%= link_to "View all", scheme_issues_path(@scheme) %></p>
-<% else %>
-  <p><%= link_to "Filter by overdue", scheme_issues_path(@scheme, overdue: 1) %></p>
-<% end %>
-
 <p><%= link_to "Trades chart", type_chart_scheme_issues_path(@scheme) %></p>
+
+
+<%= form_for_filterrific @filterrific do |f| %>
+  <%= f.text_field(:search_query) %>
+  <%= f.select(:location, @filterrific.select_options[:locations], include_blank: true) %>
+  <%= f.select(:status_filter, @filterrific.select_options[:statuses], include_blank: true) %>
+  <%= f.select(:reported_by, @filterrific.select_options[:users], include_blank: true) %>
+  <%= f.check_box :overdue_filter %>
+  <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+  <%= link_to(
+    'Reset filters',
+    reset_filterrific_url,
+  ) %>
+  <%= f.submit 'Filter' %>
+<% end %>
 
 <p><%= @issues.count %> Issues.</p>
 
