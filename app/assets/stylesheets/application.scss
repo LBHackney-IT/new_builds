@@ -14,7 +14,6 @@
  *= require foundation_and_overrides
  *= require devise_foundation_views_scss
  *= require_self
-//= require foundation_and_overrides
 
 
  */
@@ -42,4 +41,13 @@
 
 .completed {
   background-color: rgba(0, 255, 0, 0.5) !important
+}
+
+.filter-box {
+  background-color: #cacaca;
+  padding: 1em;
+}
+
+.filter-btn {
+  margin-top: 1.4em;
 }

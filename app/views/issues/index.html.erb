@@ -4,20 +4,66 @@
 
 <p><%= link_to "Trades chart", type_chart_scheme_issues_path(@scheme) %></p>
 
+<div class="filter-box">
+  <%= form_for_filterrific @filterrific do |f| %>
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="medium-4 cell">
+          <%= label_tag(:search_query, "Keyword search") %>
+          <%= text_field_tag(:search_query) %>
+        </div>
+        <div class="medium-3 cell">
+          <%= f.select(:status_filter, @filterrific.select_options[:statuses], include_blank: true) %>
+        </div>
+        <div class="medium-2 cell">
+          <label>Priority
+            <input type="text" placeholder="Select priority">
+          </label>
+        </div>
+        <div class="medium-3 cell">
+          <label>Trade
+            <input type="text" placeholder="Select priority">
+          </label>
+        </div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="medium-6 cell">
+          <%= f.select(:location, @filterrific.select_options[:locations], include_blank: true) %>
+        </div>
+        <div class="medium-6 cell">
+          <label>Flat number
+            <input type="number" placeholder="Enter flat number">
+          </label>
+        </div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="medium-3 cell">
+        Show overdue only
+          <%= f.check_box :overdue_filter %>
+        </div>
+        <div class="medium-3 cell">
+          <%= f.select(:reported_by, @filterrific.select_options[:users], include_blank: true) %>
+        </div>
+        <div class="medium-3 cell">
+          <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+        </div>
+        <div class="medium-3 cell">
+          <%= f.submit 'Filter', class: 'button expanded filter-btn' %>
 
-<%= form_for_filterrific @filterrific do |f| %>
-  <%= f.text_field(:search_query) %>
-  <%= f.select(:location, @filterrific.select_options[:locations], include_blank: true) %>
-  <%= f.select(:status_filter, @filterrific.select_options[:statuses], include_blank: true) %>
-  <%= f.select(:reported_by, @filterrific.select_options[:users], include_blank: true) %>
-  <%= f.check_box :overdue_filter %>
-  <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-  <%= link_to(
-    'Reset filters',
-    reset_filterrific_url,
-  ) %>
-  <%= f.submit 'Filter' %>
-<% end %>
+        </div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="cell">
+          <%= link_to(
+            'Reset filters',
+            reset_filterrific_url, class: 'float-right'
+          ) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 
 <p><%= @issues.count %> Issues.</p>
 
