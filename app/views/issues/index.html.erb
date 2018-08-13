@@ -64,8 +64,16 @@
   <% end %>
 </div>
 
+<div class="grid-x grid-padding-x margin-top-1">
+  <div class="medium-6 cell">
+    <p><%= @issues.count %> issues</p>
+  </div>
+  <div class="medium-6 cell">
+    <p class="float-right">Results per page XX | <span><%= link_to('Show all')%></span></p>
+  </div>
+</div>
 
-<p><%= @issues.count %> Issues.</p>
+<%= will_paginate @issues, renderer: FoundationPagination::Rails %>
 
 <table class="shadow">
   <thead>
