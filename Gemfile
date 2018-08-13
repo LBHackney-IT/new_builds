@@ -36,6 +36,7 @@ gem 'closure_tree'
 gem 'will_paginate-foundation'
 gem 'chartkick'
 gem 'filterrific'
+gem 'highcharts-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

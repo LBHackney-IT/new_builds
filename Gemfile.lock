@@ -115,6 +115,8 @@ GEM
       tzinfo (~> 1.2, >= 1.2.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    highcharts-rails (6.0.3)
+      railties (>= 3.1)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -274,6 +276,7 @@ DEPENDENCIES
   filterrific
   foundation-rails
   foundation_rails_helper
+  highcharts-rails
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
