@@ -35,6 +35,7 @@ gem 'autoprefixer-rails'
 gem 'closure_tree'
 gem 'will_paginate-foundation'
 gem 'chartkick'
+gem 'filterrific'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

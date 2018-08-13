@@ -102,6 +102,7 @@ GEM
     faker (1.9.1)
       i18n (>= 0.7)
     ffi (1.9.25)
+    filterrific (5.1.0)
     foundation-rails (6.4.3.0)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
@@ -270,6 +271,7 @@ DEPENDENCIES
   devise-foundation-views
   factory_bot_rails
   faker
+  filterrific
   foundation-rails
   foundation_rails_helper
   jbuilder (~> 2.5)

@@ -1,11 +1,17 @@
 class IssuesController < ApplicationController
   before_action :get_scheme
   def index
-    if params[:overdue]
-      @issues = @scheme.issues.open.overdue.order('due_at ASC').paginate(:page => params[:page])
-    else
-      @issues = @scheme.issues.order('due_at DESC').paginate(:page => params[:page])
-    end
+    @filterrific = initialize_filterrific(
+      @scheme.issues,
+      params[:filterrific],
+      :select_options => {
+        sorted_by: Issue.options_for_sorted_by,
+        locations: @scheme.locations.collect {|x| [x.name, x.id]},
+        statuses: Issue::Statuses,
+        users: User.all.collect {|x| [x.email, x.id]},
+      }
+    ) or return
+    @issues = @filterrific.find.page(params[:page])
   end
 
   def type_chart
