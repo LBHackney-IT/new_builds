@@ -32,7 +32,7 @@ class IssuesController < ApplicationController
     @issue = @scheme.issues.new(issue_params)
     @issue.user = current_user
     if @issue.save
-      redirect_to scheme_issues_path(@scheme)
+      redirect_to scheme_issue_path(@scheme, @issue)
     else
       render action: :new
     end
@@ -45,7 +45,7 @@ class IssuesController < ApplicationController
   def update
     @issue = @scheme.issues.find(params[:id])
     if @issue.update_attributes(issue_params)
-      redirect_to scheme_issues_path(@scheme)
+      redirect_to scheme_issue_path(@scheme, @issue)
     else
       render action: :new
     end

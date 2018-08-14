@@ -26,6 +26,6 @@ RSpec.feature 'Operative can create an issue' do
     fill_in 'Description', with: 'Issue Description'
     select 'Outstanding', from: 'Status'
     click_on 'Create Issue'
-    expect(page).to have_content('SchemeName')
+    expect(page).to have_content('Issue details')
   end
 end
