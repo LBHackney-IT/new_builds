@@ -27,14 +27,10 @@
           <%= f.select(:status_filter, @filterrific.select_options[:statuses], include_blank: "All") %>
         </div>
         <div class="medium-2 cell">
-          <label>Priority
-            <input type="text" placeholder="Select priority">
-          </label>
+          <%= f.select(:priority_filter, @filterrific.select_options[:priorities], include_blank: "All") %>
         </div>
         <div class="medium-3 cell">
-          <label>Trade
-            <input type="text" placeholder="Select priority">
-          </label>
+          <%= f.select(:trade_filter, @filterrific.select_options[:trades], include_blank: "All") %>
         </div>
       </div>
       <div class="grid-x grid-padding-x">

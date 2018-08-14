@@ -9,6 +9,8 @@ class IssuesController < ApplicationController
         locations: @scheme.options_for_locations,
         statuses: Issue::Statuses,
         users: User.all.collect {|x| [x.email, x.id]},
+        priorities: @scheme.scheme_priorities.collect {|x| [x.name, x.id]},
+        trades: Issue.all.pluck(:trade).uniq,
       }
     ) or return
     if params[:chart].present?
