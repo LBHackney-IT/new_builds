@@ -20,8 +20,7 @@
     <div class="grid-container">
       <div class="grid-x grid-padding-x">
         <div class="medium-4 cell">
-          <%= label_tag(:search_query, "Keyword search") %>
-          <%= text_field_tag(:search_query) %>
+          <%= f.text_field(:search_query, label: 'Keyword Search') %>
         </div>
         <div class="medium-3 cell">
           <%= f.select(:status_filter, @filterrific.select_options[:statuses], include_blank: "All") %>
