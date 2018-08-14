@@ -3,5 +3,5 @@
 <%= form.select :scheme_priority_id, @scheme.scheme_priorities.collect {|x| [x.name, x.id]} %>
 <%= form.select :resident_id, @scheme.residents.collect {|x| [x.name, x.id]} %>
 <%= form.text_area :description %>
-<%= form.text_field :trade %>
+<%= form.select :trade, Issue.trades, include_blank: true %>
 <%= form.select :status, Issue::Statuses %>
