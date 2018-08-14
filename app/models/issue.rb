@@ -63,8 +63,6 @@ class Issue < ApplicationRecord
     case sort_option.to_s
     when /^created_at_/
       order("created_at #{ direction }")
-    when /^trade_/
-      order("trade #{ direction }")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end
@@ -80,7 +78,6 @@ class Issue < ApplicationRecord
 
   def self.options_for_sorted_by
     [
-      ['Trade', 'trade_asc'],
       ['Created at (newest first)', 'created_at_desc'],
       ['Created at (oldest first)', 'created_at_asc'],
     ]
