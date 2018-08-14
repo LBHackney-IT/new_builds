@@ -22,5 +22,5 @@
 $(function(){ $(document).foundation(); });
 
 $(document).ready(function() {
-    $('#filterrific_location').select2();
+    $('#filterrific_location, #issue_location_id, #issue_resident_id').select2();
 });
