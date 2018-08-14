@@ -18,7 +18,7 @@ RSpec.feature 'Operative can create an issue' do
     fill_in 'Password', with: 'password'
     click_on 'Sign in'
     click_on 'SchemeName'
-    click_on 'New issue'
+    click_on 'Add new issue'
     fill_in 'Urn', with: 'URN1'
     select 'Dwelling 1', from: 'Location'
     select 'p1', from: 'Scheme priority'
@@ -26,6 +26,6 @@ RSpec.feature 'Operative can create an issue' do
     fill_in 'Description', with: 'Issue Description'
     select 'Outstanding', from: 'Status'
     click_on 'Create Issue'
-    expect(page).to have_content('Issues in SchemeName')
+    expect(page).to have_content('SchemeName')
   end
 end
