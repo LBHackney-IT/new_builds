@@ -19,20 +19,32 @@ class Issue < ApplicationRecord
                 location
                 status_filter
                 reported_by
+                priority_filter
+                trade_filter
               ]
 
   scope :overdue_filter, lambda { |flag|
-    return nil  if 0 == flag # checkbox unchecked
+    return nil if 0 == flag # checkbox unchecked
     where("due_at < ?", Time.now).where("status = 'Outstanding'")
   }
 
   scope :status_filter, lambda { |status|
-    return nil  if status.blank?
+    return nil if status.blank?
     where("status = ?", status)
   }
 
+  scope :priority_filter, lambda { |priority|
+    return nil if priority.blank?
+    where("scheme_priority_id = ?", priority)
+  }
+
+  scope :trade_filter, lambda { |trade|
+    return nil if trade.blank?
+    where("trade = ?", trade)
+  }
+
   scope :search_query, lambda { |query|
-    return nil  if query.blank?
+    return nil if query.blank?
     # condition query, parse into individual keywords
     terms = query.downcase.split(/\s+/)
     # replace "*" with "%" for wildcard searches,
