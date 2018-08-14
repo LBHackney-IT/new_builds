@@ -1,25 +1,92 @@
-<h1>Issues in <%= @scheme.name %></h1>
 
-<%= link_to "New issue", new_scheme_issue_path(@scheme), class: 'button float-right' %>
+<div class="grid-x grid-padding-x sub-nav">
+  <div class="medium-6 cell">
+    <h1 class="h5 font-bold"><%= @scheme.name %></h1>
+  </div>
+  <div class="medium-6 cell">
+    <ul class="menu align-right">
+      <li><a href="#">Dashboard</a></li>
+      <li class="is-active"><a href="#">Issues</a></li>
+      <li><a href="#">Search</a></li>
+      <li><%= link_to "Reports", type_chart_scheme_issues_path(@scheme) %></li>
+    </ul>
+  </div>
+</div>
 
-<p><%= link_to "Trades chart", type_chart_scheme_issues_path(@scheme) %></p>
+<h1>Issues <%= link_to "Add new issue", new_scheme_issue_path(@scheme), class: 'button float-right' %></h1>
 
+<div class="filter-box">
+  <%= form_for_filterrific @filterrific do |f| %>
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="medium-4 cell">
+          <%= label_tag(:search_query, "Keyword search") %>
+          <%= text_field_tag(:search_query) %>
+        </div>
+        <div class="medium-3 cell">
+          <%= f.select(:status_filter, @filterrific.select_options[:statuses], include_blank: true) %>
+        </div>
+        <div class="medium-2 cell">
+          <label>Priority
+            <input type="text" placeholder="Select priority">
+          </label>
+        </div>
+        <div class="medium-3 cell">
+          <label>Trade
+            <input type="text" placeholder="Select priority">
+          </label>
+        </div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="medium-6 cell">
+          <%= f.select(:location, @filterrific.select_options[:locations], include_blank: true) %>
+        </div>
+        <div class="medium-6 cell">
+          <label>Flat number
+            <input type="number" placeholder="Enter flat number">
+          </label>
+        </div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="medium-3 cell">
+        Show overdue only
+          <%= f.check_box :overdue_filter %>
+        </div>
+        <div class="medium-3 cell">
+          <%= f.select(:reported_by, @filterrific.select_options[:users], include_blank: true) %>
+        </div>
+        <div class="medium-3 cell">
+          <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+        </div>
+        <div class="medium-3 cell">
+          <%= f.submit 'Filter', class: 'button expanded filter-btn' %>
+        </div>
+      </div>
+      <div class="grid-x grid-padding-x">
+        <div class="cell">
+          <%= link_to(
+            'Reset filters',
+            reset_filterrific_url, class: 'float-right'
+          ) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<%= form_for_filterrific @filterrific do |f| %>
-  <%= f.text_field(:search_query) %>
-  <%= f.select(:location, @filterrific.select_options[:locations], include_blank: true) %>
-  <%= f.select(:status_filter, @filterrific.select_options[:statuses], include_blank: true) %>
-  <%= f.select(:reported_by, @filterrific.select_options[:users], include_blank: true) %>
-  <%= f.check_box :overdue_filter %>
-  <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-  <%= link_to(
-    'Reset filters',
-    reset_filterrific_url,
-  ) %>
-  <%= f.submit 'Filter' %>
-<% end %>
+<div class="grid-x grid-padding-x margin-top-1">
+  <div class="medium-6 cell">
+    <p><%= @issues.count %> issues</p>
+  </div>
+  <div class="medium-6 cell">
+    <p class="float-right">Results per page XX | <span><%= link_to('Show all')%></span></p>
+  </div>
+  <div class="cell padding-bottom-1">
+    <a href="">Download a spreadsheet of issues in <%= @scheme.name %></a>
+  </div>
+</div>
 
-<p><%= @issues.count %> Issues.</p>
+<%= will_paginate @issues, renderer: FoundationPagination::Rails %>
 
 <table class="shadow">
   <thead>

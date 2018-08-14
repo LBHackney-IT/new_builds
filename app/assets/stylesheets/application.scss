@@ -14,10 +14,37 @@
  *= require foundation_and_overrides
  *= require devise_foundation_views_scss
  *= require_self
-//= require foundation_and_overrides
 
 
  */
+
+.top-bar {
+  color: #fff;
+  .app-title {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  .menu {
+    a {
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+}
+
+.sub-nav {
+  border-bottom: 1px solid #8a8a8a;
+  margin: 2em auto;
+
+  .menu .is-active > a {
+    background: transparent;
+    color: #0a0a0a;
+    font-weight: bold;
+    border-bottom: 5px solid #1779ba;
+  }
+}
+
+
 
 .label.Completed {
   background-color: #3adb76;
@@ -42,4 +69,13 @@
 
 .completed {
   background-color: rgba(0, 255, 0, 0.5) !important
+}
+
+.filter-box {
+  background-color: #cacaca;
+  padding: 1em;
+}
+
+.filter-btn {
+  margin-top: 1.4em;
 }
