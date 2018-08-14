@@ -10,4 +10,14 @@ class Scheme < ApplicationRecord
   def residents
     dwellings.collect {|x| x.residents}.flatten
   end
+
+  def options_for_locations
+    locations.collect do |location|
+      if location.is_a? Location::Dwelling
+        [location.name, location.id]
+      else
+        ["#{location.name} (Communal)", location.id]
+      end
+    end
+  end
 end

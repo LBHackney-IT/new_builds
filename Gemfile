@@ -37,6 +37,8 @@ gem 'will_paginate-foundation'
 gem 'chartkick'
 gem 'filterrific'
 gem 'highcharts-rails'
+gem 'jquery-rails'
+gem 'select2-foundation'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

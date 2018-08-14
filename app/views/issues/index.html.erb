@@ -24,7 +24,7 @@
           <%= text_field_tag(:search_query) %>
         </div>
         <div class="medium-3 cell">
-          <%= f.select(:status_filter, @filterrific.select_options[:statuses], include_blank: true) %>
+          <%= f.select(:status_filter, @filterrific.select_options[:statuses], include_blank: "All") %>
         </div>
         <div class="medium-2 cell">
           <label>Priority
@@ -39,12 +39,7 @@
       </div>
       <div class="grid-x grid-padding-x">
         <div class="medium-6 cell">
-          <%= f.select(:location, @filterrific.select_options[:locations], include_blank: true) %>
-        </div>
-        <div class="medium-6 cell">
-          <label>Flat number
-            <input type="number" placeholder="Enter flat number">
-          </label>
+          <%= f.select(:location, @filterrific.select_options[:locations], include_blank: "All") %>
         </div>
       </div>
       <div class="grid-x grid-padding-x">
@@ -53,7 +48,7 @@
           <%= f.check_box :overdue_filter %>
         </div>
         <div class="medium-3 cell">
-          <%= f.select(:reported_by, @filterrific.select_options[:users], include_blank: true) %>
+          <%= f.select(:reported_by, @filterrific.select_options[:users], include_blank: "All") %>
         </div>
         <div class="medium-3 cell">
           <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>

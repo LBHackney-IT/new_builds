@@ -6,7 +6,7 @@ class IssuesController < ApplicationController
       params[:filterrific],
       :select_options => {
         sorted_by: Issue.options_for_sorted_by,
-        locations: @scheme.locations.collect {|x| [x.name, x.id]},
+        locations: @scheme.options_for_locations,
         statuses: Issue::Statuses,
         users: User.all.collect {|x| [x.email, x.id]},
       }
