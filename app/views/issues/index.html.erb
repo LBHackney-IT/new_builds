@@ -99,6 +99,7 @@
       <th>Trade</th>
       <th>Priority</th>
       <th>Due at</th>
+      <th>Completed at</th>
       <th>Status</th>
       <th>Location</th>
       <th></th>
@@ -116,6 +117,9 @@
         <td><%= issue.scheme_priority.name %></td>
         <td>
           <%= issue.due_at.to_s(:short) %>
+        </td>
+        <td>
+          <%= issue.completed_at.to_s(:short) if issue.completed_at %>
         </td>
         <td>
           <% if issue.overdue? %>
