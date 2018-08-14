@@ -85,15 +85,15 @@
   <%= will_paginate @issues, renderer: FoundationPagination::Rails %>
 <% end %>
 
-<ul class="tabs">
-  <li class="tabs-title<%= ' is-active' if !params[:chart] %>">
-    <%= link_to "Table", params.permit!.merge(chart: nil) %>
+<ul class="tabs" id="issues-tabs">
+  <li class="tabs-title">
+    <%= link_to "Table", params.permit!.merge(chart: nil), 'aria-selected': !params[:chart] %>
   </li>
-  <li class="tabs-title<%= ' is-active' if params[:chart] == 'trade' %>">
-    <%= link_to "Trades", params.permit!.merge(chart: 'trade') %>
+  <li class="tabs-title">
+    <%= link_to "Trades", params.permit!.merge(chart: 'trade'), 'aria-selected': params[:chart] == 'trade' %>
   </li>
-  <li class="tabs-title<%= ' is-active' if params[:chart] == 'status' %>">
-    <%= link_to "Statuses", params.permit!.merge(chart: 'status') %>
+  <li class="tabs-title">
+    <%= link_to "Statuses", params.permit!.merge(chart: 'status'), 'aria-selected': params[:chart] == 'status'  %>
   </li>
 </ul>
 
