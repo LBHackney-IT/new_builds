@@ -22,7 +22,7 @@
         </div>
         <div class="top-bar-right">
           <ul class="menu">
-            <li><a href="#">Schemes</a></li>
+            <li><%= link_to "Schemes", root_path %></a></li>
             <li>
               <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
             </li>
