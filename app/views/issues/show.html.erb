@@ -15,6 +15,9 @@
         <!-- success, at completion date -->
         <span class="label <%= @issue.status%>"><%= @issue.status  %></span>
         <span>due <%= @issue.due_at.to_s(:short) %></span>
+        <% if @issue.completed_at.present? %>
+          <span>completed <%= @issue.completed_at.to_s(:short) %></span>
+        <% end %>
         <!-- TODO show overdue days -->
       </div>
       <hr>
