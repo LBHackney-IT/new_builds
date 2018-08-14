@@ -108,4 +108,8 @@ class Issue < ApplicationRecord
   def overdue_or_status
     overdue? ? 'overdue' : status.downcase
   end
+
+  def self.trades
+    all.pluck(:trade).uniq.compact.sort
+  end
 end
