@@ -11,12 +11,11 @@ class IssuesController < ApplicationController
         users: User.all.collect {|x| [x.email, x.id]},
       }
     ) or return
-    @issues = @filterrific.find.page(params[:page])
-  end
-
-  def type_chart
-    @trades = @scheme.issues.group(:trade).count
-    @trades["None"] = @trades.delete(nil)
+    if params[:chart].present?
+      @issues = @filterrific.find.group(params[:chart]).unscope(:order).count
+    else
+      @issues = @filterrific.find.page(params[:page])
+    end
   end
 
   def show

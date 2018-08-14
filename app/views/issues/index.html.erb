@@ -8,7 +8,6 @@
       <li><a href="#">Dashboard</a></li>
       <li class="is-active"><a href="#">Issues</a></li>
       <li><a href="#">Search</a></li>
-      <li><%= link_to "Reports", type_chart_scheme_issues_path(@scheme) %></li>
     </ul>
   </div>
 </div>
@@ -17,6 +16,7 @@
 
 <div class="filter-box">
   <%= form_for_filterrific @filterrific do |f| %>
+    <%= hidden_field_tag :chart, params[:chart] %>
     <div class="grid-container">
       <div class="grid-x grid-padding-x">
         <div class="medium-4 cell">
@@ -86,50 +86,24 @@
   </div>
 </div>
 
-<%= will_paginate @issues, renderer: FoundationPagination::Rails %>
+<% if params[:chart].blank? %>
+  <%= will_paginate @issues, renderer: FoundationPagination::Rails %>
+<% end %>
 
-<table class="shadow">
-  <thead>
-    <tr>
-      <th>URN</th>
-      <th>Reported by</th>
-      <th>Date reported</th>
-      <th>Resident</th>
-      <th>Description</th>
-      <th>Trade</th>
-      <th>Priority</th>
-      <th>Due at</th>
-      <th>Status</th>
-      <th>Location</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @issues.each do |issue| %>
-      <tr class="<%= issue.overdue_or_status %>">
-        <td><%= issue.urn %></td>
-        <td><%= issue.user.email %></td>
-        <td><%= issue.created_at.to_s(:short) %></td>
-        <td><%= issue.resident.name %></td>
-        <td><%= truncate issue.description %></td>
-        <td><%= issue.trade %></td>
-        <td><%= issue.scheme_priority.name %></td>
-        <td>
-          <%= issue.due_at.to_s(:short) %>
-        </td>
-        <td>
-          <% if issue.overdue? %>
-            <%= time_ago_in_words(issue.due_at) %>
-            overdue
-          <% else %>
-            <%= issue.status %>
-          <% end %>
-        </td>
-        <td><%= issue.location.name %></td>
-        <td><%= link_to "View", scheme_issue_path(@scheme, issue) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul class="tabs">
+  <li class="tabs-title<%= ' is-active' if !params[:chart] %>">
+    <%= link_to "Table", params.permit!.merge(chart: nil) %>
+  </li>
+  <li class="tabs-title<%= ' is-active' if params[:chart] == 'trade' %>">
+    <%= link_to "Trades", params.permit!.merge(chart: 'trade') %>
+  </li>
+  <li class="tabs-title<%= ' is-active' if params[:chart] == 'status' %>">
+    <%= link_to "Statuses", params.permit!.merge(chart: 'status') %>
+  </li>
+</ul>
 
-<%= will_paginate @issues, renderer: FoundationPagination::Rails %>
+<% if params[:chart].present? %>
+  <%= render partial: 'chart' %>
+<% else %>
+  <%= render partial: 'table' %>
+<% end %>
