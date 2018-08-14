@@ -81,6 +81,9 @@
   <div class="medium-6 cell">
     <p class="float-right">Results per page XX | <span><%= link_to('Show all')%></span></p>
   </div>
+  <div class="cell padding-bottom-1">
+    <a href="">Download a spreadsheet of issues in <%= @scheme.name %></a>
+  </div>
 </div>
 
 <%= will_paginate @issues, renderer: FoundationPagination::Rails %>
