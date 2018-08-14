@@ -1,0 +1,45 @@
+<table class="shadow">
+  <thead>
+    <tr>
+      <th>URN</th>
+      <th>Reported by</th>
+      <th>Date reported</th>
+      <th>Resident</th>
+      <th>Description</th>
+      <th>Trade</th>
+      <th>Priority</th>
+      <th>Due at</th>
+      <th>Status</th>
+      <th>Location</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @issues.each do |issue| %>
+      <tr class="<%= issue.overdue_or_status %>">
+        <td><%= issue.urn %></td>
+        <td><%= issue.user.email %></td>
+        <td><%= issue.created_at.to_s(:short) %></td>
+        <td><%= issue.resident.name %></td>
+        <td><%= truncate issue.description %></td>
+        <td><%= issue.trade %></td>
+        <td><%= issue.scheme_priority.name %></td>
+        <td>
+          <%= issue.due_at.to_s(:short) %>
+        </td>
+        <td>
+          <% if issue.overdue? %>
+            <%= time_ago_in_words(issue.due_at) %>
+            overdue
+          <% else %>
+            <%= issue.status %>
+          <% end %>
+        </td>
+        <td><%= issue.location.name %></td>
+        <td><%= link_to "View", scheme_issue_path(@scheme, issue) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @issues, renderer: FoundationPagination::Rails %>

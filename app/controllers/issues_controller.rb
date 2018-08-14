@@ -6,17 +6,18 @@ class IssuesController < ApplicationController
       params[:filterrific],
       :select_options => {
         sorted_by: Issue.options_for_sorted_by,
-        locations: @scheme.locations.collect {|x| [x.name, x.id]},
+        locations: @scheme.options_for_locations,
         statuses: Issue::Statuses,
         users: User.all.collect {|x| [x.email, x.id]},
+        priorities: @scheme.scheme_priorities.collect {|x| [x.name, x.id]},
+        trades: Issue.all.pluck(:trade).uniq,
       }
     ) or return
-    @issues = @filterrific.find.page(params[:page])
-  end
-
-  def type_chart
-    @trades = @scheme.issues.group(:trade).count
-    @trades["None"] = @trades.delete(nil)
+    if params[:chart].present?
+      @issues = @filterrific.find.group(params[:chart]).unscope(:order).count
+    else
+      @issues = @filterrific.find.page(params[:page])
+    end
   end
 
   def show

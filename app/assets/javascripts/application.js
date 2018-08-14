@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
 //= require foundation
 //= require activestorage
 //= require turbolinks
@@ -19,3 +20,7 @@
 //= require chartkick
 
 $(function(){ $(document).foundation(); });
+
+$(document).ready(function() {
+    $('#filterrific_location').select2();
+});
