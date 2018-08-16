@@ -20,6 +20,17 @@
         <% end %>
         <!-- TODO show overdue days -->
       </div>
+      <div class="cell status_update">
+        <% if @issue.next_statuses.present? %>
+          Update Status to:
+          <% @issue.next_statuses.each do |status| %>
+            <%= form_for [@scheme, @issue] do |form| %>
+              <%= form.hidden_field :status, value: status %>
+              <%= form.submit status %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
       <hr>
       <!-- Trade, description -->
       <div class="cell description padding-left-1 padding-top-1">

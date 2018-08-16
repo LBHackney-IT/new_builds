@@ -80,3 +80,13 @@
 .filter-btn {
   margin-top: 1.4em;
 }
+
+.status_update {
+  margin: 1em 0;
+  * {
+    display: inline-block;
+  }
+  input {
+    padding: 5px;
+  }
+}

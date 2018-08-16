@@ -5,11 +5,37 @@ class Issue < ApplicationRecord
   belongs_to :resident
   belongs_to :location
   has_many :comments
-  Statuses = ["Outstanding", "Completed", "EOYD", "Dispute", "Referral", "Rejected"]
+  Statuses = [
+    "Under Inspection",
+    "Resolved by Hackney",
+    "In Progress (With Hackney)",
+    "Declined by Hackney",
+    "Pending Contractor Approval",
+    "In Progress (With Contractor)",
+    "Rejected By Contractor",
+    "Completed",
+    "Contested",
+    "Closed",
+    "EOYD",
+  ]
+  StateMap = {
+    nil => ["Under Inspection", "Pending Contractor Approval", "Decline by Hackney"],
+    "Under Inspection" => ["Resolved by Hackney", "In Progress (With Hackney)", "Pending Contractor Approval"],
+    "Resolved by Hackney" => [],
+    "In Progress (With Hackney)" => ["Resolved by Hackney"],
+    "Declined by Hackney" => [],
+    "Pending Contractor Approval" => ["EOYD", "In Progress (With Contractor)", "Rejected By Contractor"],
+    "In Progress (With Contractor)" => ["Rejected By Contractor", "Completed"],
+    "Rejected By Contractor" => ["Contested"],
+    "Completed" => ["Closed", "Contested"],
+    "Contested" => ["In Progress (With Contractor)", "In Progress (With Hackney)"],
+    "Closed" => [],
+    "EOYD" => ["In Progress (With Contractor)"],
+  }
   before_save :set_due_at
 
   scope :overdue, -> { where("due_at < ?", Time.now) }
-  scope :open, -> { where("status = 'Outstanding'") }
+  scope :open, -> { where("status = 'In Progress (With Contractor)'") }
 
   filterrific :default_filter_params => { :sorted_by => 'created_at_desc' },
               :available_filters => %w[
@@ -25,7 +51,7 @@ class Issue < ApplicationRecord
 
   scope :overdue_filter, lambda { |flag|
     return nil if 0 == flag # checkbox unchecked
-    where("due_at < ?", Time.now).where("status = 'Outstanding'")
+    where("due_at < ?", Time.now).where("status = 'In Progress (With Contractor)'")
   }
 
   scope :status_filter, lambda { |status|
@@ -102,11 +128,15 @@ class Issue < ApplicationRecord
   end
 
   def overdue?
-    self.due_at < Time.now && status == 'Outstanding'
+    self.due_at < Time.now && status == 'In Progress (With Contractor)'
   end
 
   def overdue_or_status
     overdue? ? 'overdue' : status.downcase
+  end
+
+  def next_statuses
+    StateMap[self.status]
   end
 
   def self.trades
